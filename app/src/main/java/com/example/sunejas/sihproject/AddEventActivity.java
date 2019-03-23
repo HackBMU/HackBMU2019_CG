@@ -38,7 +38,7 @@ import java.util.Date;
 
 public class AddEventActivity extends AppCompatActivity {
     TextView currentDate, days, weeks, months, years, male, female;
-    EditText title, aboutProblem, allergies, currentMed;
+    EditText title, aboutProblem, allergies;
     private ProgressDialog progress;
     ImageView problemImage;
     final int REQUEST_CODE_GALLERY = 999;
@@ -66,7 +66,6 @@ public class AddEventActivity extends AppCompatActivity {
         currentDate = findViewById(R.id.today_date);
         aboutProblem = findViewById(R.id.et_about_problem);
         allergies = findViewById(R.id.et_allergies);
-        currentMed = findViewById(R.id.et_current_med);
         days = findViewById(R.id.tv_days);
         weeks = findViewById(R.id.tv_weeks);
         months = findViewById(R.id.tv_months);
