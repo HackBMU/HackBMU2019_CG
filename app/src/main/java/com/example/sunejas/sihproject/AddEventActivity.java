@@ -42,13 +42,12 @@ import java.util.Date;
 import java.util.zip.Inflater;
 
 public class AddEventActivity extends AppCompatActivity {
-    TextView currentDate, days, weeks, months, years, male, female;
+    TextView currentDate, days, weeks, months, years;
     EditText title, aboutProblem, allergies;
     private ProgressDialog progress;
     ImageView addMedImage;
     LinearLayout llMedLayout;
     ArrayList<EditText> etMedArray;
-    final int REQUEST_CODE_GALLERY = 999;
     int n = 0, x = 0;
     Button postButton;
     Uri overviewUri, closeupUri;

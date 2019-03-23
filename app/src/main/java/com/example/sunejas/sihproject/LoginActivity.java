@@ -84,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                                                             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                                             editor.putString("phone", phone);
                                                             editor.putString("role", "patient");
+                                                            editor.putString("name",patientDetails.getmName());
+                                                            //Log.d("prerna",patientDetails.getmName());
                                                             editor.apply();
 
                                                             checker = 1;
@@ -113,6 +115,8 @@ public class LoginActivity extends AppCompatActivity {
                                                             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                                             editor.putString("phone", phone);
                                                             editor.putString("role", "doctor");
+                                                            editor.putString("name",doctorDetails.getmName());
+                                                            //Log.d("prerna", doctorDetails.getmName());
                                                             editor.apply();
 
                                                             checker = 1;

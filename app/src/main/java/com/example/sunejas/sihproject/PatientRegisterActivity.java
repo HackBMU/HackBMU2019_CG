@@ -190,6 +190,7 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
                         mProgress.dismiss();
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                         editor.putString("phone", patientDetails.getmPhone());
+                        editor.putString("name",patientDetails.getmName());
                         editor.putString("role", "patient");
                         editor.apply();
                         startActivity(new Intent(PatientRegisterActivity.this, PatientDashboardActivity.class));

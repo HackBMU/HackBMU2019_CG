@@ -16,9 +16,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_dashboard);
         postsRecyclerView = (RecyclerView) findViewById(R.id.posts_recycler_view);
-
         postsRecyclerView.setHasFixedSize(true);
-
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
     }
