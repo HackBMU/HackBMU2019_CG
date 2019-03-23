@@ -71,8 +71,6 @@ public class AddEventActivity extends AppCompatActivity {
         weeks = findViewById(R.id.tv_weeks);
         months = findViewById(R.id.tv_months);
         years = findViewById(R.id.tv_years);
-        male = findViewById(R.id.tv_male);
-        female = findViewById(R.id.tv_female);
         postButton = findViewById(R.id.button_post);
         closeup = findViewById(R.id.rl_closeup);
         overview = findViewById(R.id.rl_overview);
@@ -84,7 +82,7 @@ public class AddEventActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         phoneNumber = prefs.getString("phone", null);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        Date c = Calendar.getInstance().getTime();
+        final Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         final String formattedDate = df.format(c);
         currentDate.setText(formattedDate);
@@ -131,22 +129,22 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
-        male.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                male.setBackgroundColor(Color.CYAN);
-                female.setBackgroundColor(Color.WHITE);
-                x = 1;
-            }
-        });
-        female.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                male.setBackgroundColor(Color.WHITE);
-                female.setBackgroundColor(Color.CYAN);
-                x = 2;
-            }
-        });
+//        male.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                male.setBackgroundColor(Color.CYAN);
+//                female.setBackgroundColor(Color.WHITE);
+//                x = 1;
+//            }
+//        });
+//        female.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                male.setBackgroundColor(Color.WHITE);
+//                female.setBackgroundColor(Color.CYAN);
+//                x = 2;
+//            }
+//        });
         closeup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +168,11 @@ public class AddEventActivity extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!checkCredentials()) {
+                    return;
+                }
+
                 progress.setMessage("Uploading");
                 progress.show();
 
@@ -205,8 +208,10 @@ public class AddEventActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
 
-                            eventDetails.setOverviewURL(downloadUri.toString());
-                            Log.e("uriOverview",eventDetails.getOverviewURL());
+                            if (downloadUri != null) {
+                                eventDetails.setOverviewImage(downloadUri.toString());
+                            }
+                            Log.e("uriOverview",eventDetails.getOverviewImage());
                             filepathCloseup = mStorage.child(phoneNumber).child(closeupUri.getLastPathSegment());
 
                             UploadTask uploadTask2 = filepathCloseup.putFile(closeupUri);
@@ -245,13 +250,12 @@ public class AddEventActivity extends AppCompatActivity {
                                     if (task2.isSuccessful()) {
                                         Uri downloadUri = task2.getResult();
                                         Log.e("uriCloseup",downloadUri.toString());
-                                        eventDetails.setCloseupURL(downloadUri.toString());
-                                        eventDetails.setDate(formattedDate);
-                                        eventDetails.setTitle(title.getText().toString());
-                                        eventDetails.setDescription(aboutProblem.getText().toString());
+                                        eventDetails.setCloseupImage(downloadUri.toString());
+                                        eventDetails.setDate(c.getTime());
+                                        eventDetails.setComment(aboutProblem.getText().toString());
                                         eventDetails.setAllergies(allergies.getText().toString());
-                                        eventDetails.setCurrentMed(currentMed.getText().toString());
-                                        eventDetails.setUserId(phoneNumber);
+
+                                        eventDetails.setUserId(Long.parseLong(phoneNumber));
                                         if (n == 1) {
                                             eventDetails.setDuration("Days");
                                         } else if (n == 2) {
@@ -260,11 +264,6 @@ public class AddEventActivity extends AppCompatActivity {
                                             eventDetails.setDuration("Months");
                                         } else {
                                             eventDetails.setDuration("Years");
-                                        }
-                                        if (x == 1) {
-                                            eventDetails.setSex("Male");
-                                        } else {
-                                            eventDetails.setSex("Female");
                                         }
                                         String eventId = databaseReference.child("event").push().getKey();
                                         databaseReference.child("event").child(eventId).setValue(eventDetails);
@@ -295,6 +294,28 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    boolean checkCredentials() {
+
+        if (title.getText().toString().trim().equals("")) {
+            title.setError("enter title of problems");
+            return false;
+        }
+
+        if (aboutProblem.getText().toString().trim().equals("")) {
+            aboutProblem.setError("enter problem description");
+            return false;
+        }
+
+        if (allergies.getText().toString().trim().equals("")) {
+            allergies.setError("enter allergies");
+            return false;
+        }
+
+
+
+        return true;
     }
 
 
