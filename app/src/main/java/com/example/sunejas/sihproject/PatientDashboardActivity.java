@@ -44,7 +44,7 @@ public class PatientDashboardActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.menu_logout:
-                prefs.edit().clear().commit();
+                prefs.edit().clear().apply();
 
 
                 MDToast.makeText(PatientDashboardActivity.this, "Logout Success", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();

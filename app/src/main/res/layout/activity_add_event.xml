@@ -217,29 +217,35 @@
             android:layout_margin="10dp"
             android:hint="Allergies(If any)" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl_self_med"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_allergies">
+            android:layout_below="@+id/et_allergies"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_current_med"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="Are you taking some self medicine?"
+                android:lines="2"
+                android:text="Are you taking some self medicine? Click to add"
                 android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/iv_add"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.2"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="12dp"
                 android:layout_toRightOf="@id/tv_current_med"
                 android:background="@drawable/vector_add" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_current_med"
@@ -248,7 +254,7 @@
             android:layout_below="@+id/rl_self_med"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:orientation="horizontal" />
+            android:orientation="vertical" />
 
         <Button
             android:id="@+id/button_post"

@@ -1,6 +1,7 @@
 package com.example.sunejas.sihproject;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -9,10 +10,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,15 +36,18 @@ import com.squareup.picasso.Picasso;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.zip.Inflater;
 
 public class AddEventActivity extends AppCompatActivity {
-    TextView currentDate, days, weeks, months, years, male, female;
+    TextView currentDate, days, weeks, months, years;
     EditText title, aboutProblem, allergies;
     private ProgressDialog progress;
-    ImageView problemImage;
-    final int REQUEST_CODE_GALLERY = 999;
+    ImageView addMedImage;
+    LinearLayout llMedLayout;
+    ArrayList<EditText> etMedArray;
     int n = 0, x = 0;
     Button postButton;
     Uri overviewUri, closeupUri;
@@ -73,9 +79,13 @@ public class AddEventActivity extends AppCompatActivity {
         postButton = findViewById(R.id.button_post);
         closeup = findViewById(R.id.rl_closeup);
         overview = findViewById(R.id.rl_overview);
+        addMedImage = findViewById(R.id.iv_add);
+        llMedLayout = findViewById(R.id.ll_current_med);
 
         ivCloseupBack = findViewById(R.id.iv_closeup_back);
         ivOverviewBack = findViewById(R.id.iv_overview_back);
+
+        etMedArray = new ArrayList<>();
 
         eventDetails = new EventDetails();
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -128,22 +138,31 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
-//        male.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                male.setBackgroundColor(Color.CYAN);
-//                female.setBackgroundColor(Color.WHITE);
-//                x = 1;
-//            }
-//        });
-//        female.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                male.setBackgroundColor(Color.WHITE);
-//                female.setBackgroundColor(Color.CYAN);
-//                x = 2;
-//            }
-//        });
+        addMedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LayoutInflater inflater = (LayoutInflater)   getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View v = inflater.inflate(R.layout.selfmed_single__patient, null);
+                ImageView iv = (ImageView) v.findViewById(R.id.iv_remove);
+                final EditText et = (EditText) v.findViewById(R.id.et_med_name);
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        llMedLayout.removeView(v);
+                        Log.d("onCLick", "button pressed");
+                        Toast.makeText(AddEventActivity.this, "button pressed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddEventActivity.this, String.valueOf(etMedArray.indexOf(et)), Toast.LENGTH_SHORT).show();
+                        etMedArray.remove(et);
+                        Log.d("onClick ivRemove",String.valueOf(etMedArray.size()));
+//                        Toast.makeText(AddEventActivity.this, String.valueOf(etMedArray.size()), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                etMedArray.add(et);
+                llMedLayout.addView(v);
+            }
+        });
+
         closeup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +232,7 @@ public class AddEventActivity extends AppCompatActivity {
                             Log.e("uriOverview",eventDetails.getOverviewImage());
                             filepathCloseup = mStorage.child(phoneNumber).child(closeupUri.getLastPathSegment());
 
-                            UploadTask uploadTask2 = filepathCloseup.putFile(closeupUri);
+                            final UploadTask uploadTask2 = filepathCloseup.putFile(closeupUri);
 
                             uploadTask2.addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -225,7 +244,73 @@ public class AddEventActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     Toast.makeText(AddEventActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+                                    Task<Uri> urlTask2 = uploadTask2.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                        @Override
+                                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task2) throws Exception {
+                                            if (!task2.isSuccessful()) {
+                                                throw task2.getException();
+                                            }
+                                            return filepathCloseup.getDownloadUrl();
+                                        }
+                                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Uri> task2) {
+                                            if (task2.isSuccessful()) {
+                                                Uri downloadUri = task2.getResult();
+                                                Log.e("uriCloseup",downloadUri.toString());
+                                                eventDetails.setCloseupImage(downloadUri.toString());
+                                                eventDetails.setDate(c.getTime());
+                                                eventDetails.setComment(aboutProblem.getText().toString());
+                                                eventDetails.setAllergies(allergies.getText().toString());
 
+                                                eventDetails.setUserId(Long.parseLong(phoneNumber));
+                                                if (n == 1) {
+                                                    eventDetails.setDuration("Days");
+                                                } else if (n == 2) {
+                                                    eventDetails.setDuration("Weeks");
+                                                } else if (n == 3) {
+                                                    eventDetails.setDuration("Months");
+                                                } else {
+                                                    eventDetails.setDuration("Years");
+                                                }
+
+                                                eventDetails.setSelfMed(new ArrayList<String>());
+                                                Log.d("post button pressed", String.valueOf(etMedArray.size()));
+                                                Toast.makeText(AddEventActivity.this, String.valueOf(etMedArray.size()), Toast.LENGTH_SHORT).show();
+                                                for (EditText et : etMedArray) {
+                                                    Toast.makeText(AddEventActivity.this, et.getText().toString(), Toast.LENGTH_SHORT).show();
+                                                    Log.d("post button pressed", et.getText().toString());
+                                                    if(!et.getText().toString().trim().equals(""))
+                                                        eventDetails.getSelfMed().add(et.getText().toString().trim());
+                                                }
+
+                                                final String eventId = databaseReference.child("event").push().getKey();
+                                                databaseReference.child("event").child(eventId).setValue(eventDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            databaseReference.child("patientDetails").child(phoneNumber).child("posts").child(eventId).setValue(eventId).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if(task.isSuccessful()) {
+                                                                        progress.hide();
+                                                                        startActivity(new Intent(AddEventActivity.this, PatientDashboardActivity.class));
+                                                                        finish();
+                                                                        MDToast.makeText(AddEventActivity.this, "Posted Successfully", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+
+
+                                            } else {
+                                                // Handle failures
+                                                // ...
+                                            }
+                                        }
+                                    });
                                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                                     // ...
                                 }
@@ -235,48 +320,7 @@ public class AddEventActivity extends AppCompatActivity {
                                 }
                             });
 
-                            Task<Uri> urlTask2 = uploadTask2.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                                @Override
-                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task2) throws Exception {
-                                    if (!task2.isSuccessful()) {
-                                        throw task2.getException();
-                                    }
-                                    return filepathCloseup.getDownloadUrl();
-                                }
-                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Uri> task2) {
-                                    if (task2.isSuccessful()) {
-                                        Uri downloadUri = task2.getResult();
-                                        Log.e("uriCloseup",downloadUri.toString());
-                                        eventDetails.setCloseupImage(downloadUri.toString());
-                                        eventDetails.setDate(c.getTime());
-                                        eventDetails.setComment(aboutProblem.getText().toString());
-                                        eventDetails.setAllergies(allergies.getText().toString());
 
-                                        eventDetails.setUserId(Long.parseLong(phoneNumber));
-                                        if (n == 1) {
-                                            eventDetails.setDuration("Days");
-                                        } else if (n == 2) {
-                                            eventDetails.setDuration("Weeks");
-                                        } else if (n == 3) {
-                                            eventDetails.setDuration("Months");
-                                        } else {
-                                            eventDetails.setDuration("Years");
-                                        }
-                                        String eventId = databaseReference.child("event").push().getKey();
-                                        databaseReference.child("event").child(eventId).setValue(eventDetails);
-                                        databaseReference.child("patientDetails").child(phoneNumber).child("posts").child(eventId).setValue(eventId);
-                                        progress.hide();
-                                        startActivity(new Intent(AddEventActivity.this, PatientDashboardActivity.class));
-                                        finish();
-                                        MDToast.makeText(AddEventActivity.this, "Posted Successfully", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
-                                    } else {
-                                        // Handle failures
-                                        // ...
-                                    }
-                                }
-                            });
 
                         } else {
                         }
@@ -312,7 +356,20 @@ public class AddEventActivity extends AppCompatActivity {
             return false;
         }
 
+        if(overviewUri == null) {
+            Toast.makeText(this, "please upload image", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
+        if (closeupUri == null) {
+            Toast.makeText(this, "please upload image", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (n == 0) {
+            Toast.makeText(this, "please add duration", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         return true;
     }
