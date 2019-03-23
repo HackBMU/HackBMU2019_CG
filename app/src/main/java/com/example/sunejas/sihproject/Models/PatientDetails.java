@@ -1,7 +1,7 @@
 package com.example.sunejas.sihproject.Models;
 
 public class PatientDetails {
-    private String mName, Email, mCity, mPhone,mBloodGroup,mAge,mPassword;
+    private String mName, Email, mCity, mPhone,mBloodGroup,mAge,mPassword,mToken;
 
     public PatientDetails() {
     }
@@ -13,6 +13,14 @@ public class PatientDetails {
         this.mPhone = mPhone;
         this.mBloodGroup = mBloodGroup;
         this.mAge = mAge;
+    }
+
+    public String getmToken() {
+        return mToken;
+    }
+
+    public void setmToken(String mToken) {
+        this.mToken = mToken;
     }
 
     public String getmName() {

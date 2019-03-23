@@ -4,7 +4,10 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
@@ -13,17 +16,25 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sunejas.sihproject.Fragments.FragmentOtpChecker;
 import com.example.sunejas.sihproject.Models.PatientDetails;
+import com.example.sunejas.sihproject.Utilities.GetRoundedImage;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.valdesekamdem.library.mdtoast.MDToast;
 
 import java.util.ArrayList;
@@ -33,9 +44,10 @@ import static com.example.sunejas.sihproject.Fragments.FragmentOtpChecker.REQUES
 
 public class PatientRegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus {
     private EditText userName, userEmail, userPhone, userCity,userBloodGroup,userAge,userPassword;
-    private RelativeLayout view;
+    private CardView view;
     private ProgressDialog mProgress;
     private PatientDetails patientDetails;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
     private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,13 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
         userPassword=(EditText)findViewById(R.id.et_reg_password);
         userBloodGroup=(EditText)findViewById(R.id.et_reg_blood_group);
         userAge=(EditText)findViewById(R.id.et_reg_patient_age);
-        view = (RelativeLayout) findViewById(R.id.rl_main_view);
+        view = findViewById(R.id.rl_main_view);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),R.drawable.arrived_qr);
+        GetRoundedImage getRoundedImage=new GetRoundedImage();
+        Bitmap circularBitmap =getRoundedImage.getRoundedShape(bitmap);
+
+        ImageView circularImageView = (ImageView)findViewById(R.id.doctor_image);
+        circularImageView.setImageBitmap(circularBitmap);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Registering You");
@@ -62,15 +80,23 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
                 Boolean checker = validateCredentials();
                 if (checker) {
                     mProgress.show();
-                    patientDetails.setEmail(userEmail.getText().toString());
-                    patientDetails.setmName(userName.getText().toString());
-                    patientDetails.setmCity(userCity.getText().toString());
-                    patientDetails.setmPhone(userPhone.getText().toString());
-                    patientDetails.setmBloodGroup(userBloodGroup.getText().toString());
-                    patientDetails.setmAge(userAge.getText().toString());
-                    patientDetails.setmPassword(userPassword.getText().toString());
-                    //MDToast.makeText(PatientRegisterActivity.this, "Done!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
-                    checkOTP(patientDetails);
+                    FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( PatientRegisterActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+                        @Override
+                        public void onSuccess(InstanceIdResult instanceIdResult) {
+                            String newToken = instanceIdResult.getToken();
+                            patientDetails.setmToken(newToken);
+                            patientDetails.setEmail(userEmail.getText().toString());
+                            patientDetails.setmName(userName.getText().toString());
+                            patientDetails.setmCity(userCity.getText().toString());
+                            patientDetails.setmPhone(userPhone.getText().toString());
+                            patientDetails.setmBloodGroup(userBloodGroup.getText().toString());
+                            patientDetails.setmAge(userAge.getText().toString());
+                            patientDetails.setmPassword(userPassword.getText().toString());
+                            //MDToast.makeText(PatientRegisterActivity.this, "Done!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                            checkOTP(patientDetails);
+
+                        }
+                    });
                 }
             }
         });
@@ -121,6 +147,20 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
                 userPhone.setError("Enter a valid Phone Number");
                 return false;
             }
+            if (userAge.getText().toString().equals("")) {
+                userAge.setError("Enter a Age");
+                return false;
+            }
+            if (userCity.getText().toString().equals("")) {
+                userCity.setError("Enter a City");
+                return false;
+            }
+            if (userBloodGroup.getText().toString().equals("")) {
+                userBloodGroup.setError("Enter a Blood Group=");
+                return false;
+            }
+
+
             return true;
         }
 
@@ -134,18 +174,30 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
         public void updateResult(boolean status) {
         if (status) {
             registerUser();
-            MDToast.makeText(PatientRegisterActivity.this, "Registered!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
-            mProgress.dismiss();
-            startActivity(new Intent(PatientRegisterActivity.this, PatientDashboardActivity.class));
-            finish();
         } else {
             mProgress.dismiss();
         }
         }
 
         public void registerUser(){
-        databaseReference.child("patientDetails").child(patientDetails.getmPhone()).setValue(patientDetails);
-        databaseReference.child("users").child(patientDetails.getmPhone()).setValue("patient");
+        databaseReference.child("patientDetails").child(patientDetails.getmPhone()).setValue(patientDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                databaseReference.child("users").child(patientDetails.getmPhone()).setValue("patient").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        MDToast.makeText(PatientRegisterActivity.this, "Registered!", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                        mProgress.dismiss();
+                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putString("phone", patientDetails.getmPhone());
+                        editor.putString("role", "patient");
+                        editor.apply();
+                        startActivity(new Intent(PatientRegisterActivity.this, PatientDashboardActivity.class));
+                        finishAffinity();
+                    }
+                });
+            }
+        });
         }
         private void checkAndRequestPermissions() {
             int receiveSMS = ContextCompat.checkSelfPermission(this,

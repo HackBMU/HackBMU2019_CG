@@ -28,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="100dp"
+            android:layout_below="@+id/doctor_image"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="30dp"
             app:cardCornerRadius="6dp"
             android:layout_marginBottom="30dp">
@@ -179,7 +180,6 @@
                     android:maxLines="1"
                     android:padding="12dp"
                     android:singleLine="true"
-                    android:textColor="#fff"
                     android:textSize="13sp" />
 
 
