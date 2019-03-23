@@ -60,8 +60,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="35dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:padding="35dp">
 
                     <ImageView
                         android:id="@+id/iv_closeup"
@@ -77,15 +77,16 @@
                         android:text="Close Up"
                         android:textSize="17sp" />
                 </RelativeLayout>
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="165dp"
-                    />
+                    android:layout_height="165dp" />
+
                 <ImageView
                     android:id="@+id/iv_closeup_back"
                     android:layout_width="match_parent"
-                    android:scaleType="centerCrop"
-                    android:layout_height="165dp"/>
+                    android:layout_height="165dp"
+                    android:scaleType="centerCrop" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -96,15 +97,14 @@
                 android:layout_toRightOf="@+id/rl_closeup"
                 android:layout_weight="1"
                 android:background="#D3D3D3"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="35dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:padding="35dp">
 
                     <ImageView
                         android:id="@+id/iv_overview"
@@ -120,11 +120,12 @@
                         android:text="Overview"
                         android:textSize="17sp" />
                 </RelativeLayout>
+
                 <ImageView
                     android:id="@+id/iv_overview_back"
                     android:layout_width="match_parent"
-                    android:scaleType="centerCrop"
-                    android:layout_height="165dp"/>
+                    android:layout_height="165dp"
+                    android:scaleType="centerCrop" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -216,19 +217,44 @@
             android:layout_margin="10dp"
             android:hint="Allergies(If any)" />
 
-        <EditText
-            android:id="@+id/et_current_med"
+        <RelativeLayout
+            android:id="@+id/rl_self_med"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_allergies"
-            android:layout_margin="10dp"
-            android:hint="Current medication(If any)" />
+            android:layout_below="@+id/et_allergies">
+
+            <TextView
+                android:id="@+id/tv_current_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Are you taking some self medicine?"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tv_current_med"
+                android:background="@drawable/vector_add" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_current_med"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_self_med"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal" />
 
         <Button
             android:id="@+id/button_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_current_med"
+            android:layout_below="@+id/ll_current_med"
             android:layout_centerHorizontal="true"
             android:text="POST" />
     </RelativeLayout>
