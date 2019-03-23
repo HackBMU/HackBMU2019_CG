@@ -2,11 +2,13 @@ package com.example.sunejas.sihproject.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sunejas.sihproject.Models.EventDetails;
 import com.example.sunejas.sihproject.R;
@@ -37,6 +39,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHoder> {
     public void onBindViewHolder(MyHoder holder, int position) {
         EventDetails mylist = list.get(position);
         Long date=mylist.getDate();
+        Toast.makeText(context, "pahoch gye", Toast.LENGTH_SHORT).show();
+        Log.d("logger", "pahoch gye");
         SimpleDateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
         String formattedDate = df.format(date);
         holder.date.setText(formattedDate);

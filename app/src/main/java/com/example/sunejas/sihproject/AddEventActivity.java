@@ -88,7 +88,7 @@ public class AddEventActivity extends AppCompatActivity {
         etMedArray = new ArrayList<>();
 
         eventDetails = new EventDetails();
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         phoneNumber = prefs.getString("phone", null);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         final Date c = Calendar.getInstance().getTime();
@@ -262,7 +262,9 @@ public class AddEventActivity extends AppCompatActivity {
                                                 eventDetails.setDate(c.getTime());
                                                 eventDetails.setComment(aboutProblem.getText().toString());
                                                 eventDetails.setAllergies(allergies.getText().toString());
-
+                                                SharedPreferences sPref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                                                String name = prefs.getString("name", null);
+                                                eventDetails.setName(name);
                                                 eventDetails.setUserId(Long.parseLong(phoneNumber));
                                                 if (n == 1) {
                                                     eventDetails.setDuration("Days");

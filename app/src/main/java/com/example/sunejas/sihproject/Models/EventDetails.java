@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EventDetails {
 
-    private String allergies, assignedDocName, closeupImage, comment, overviewImage, duration;
+    private String allergies, assignedDocName, closeupImage, comment, overviewImage, duration, name;
     private long date, assignedDoc, userId;
     private ArrayList<String> progress, selfMed, tags;
     private int priority;
@@ -18,13 +18,14 @@ public class EventDetails {
         this.duration = duration;
     }
 
-    public EventDetails(String allergies, String assignedDocName, String closeupImage, String comment, String overviewImage, String duration, long date, long assignedDoc, long userId, ArrayList<String> progress, ArrayList<String> selfMed, ArrayList<String> tags, int priority, DocMed docMed) {
+    public EventDetails(String allergies, String assignedDocName, String closeupImage, String comment, String overviewImage, String duration, String name, long date, long assignedDoc, long userId, ArrayList<String> progress, ArrayList<String> selfMed, ArrayList<String> tags, int priority, DocMed docMed) {
         this.allergies = allergies;
         this.assignedDocName = assignedDocName;
         this.closeupImage = closeupImage;
         this.comment = comment;
         this.overviewImage = overviewImage;
         this.duration = duration;
+        this.name = name;
         this.date = date;
         this.assignedDoc = assignedDoc;
         this.userId = userId;
@@ -140,5 +141,13 @@ public class EventDetails {
 
     public void setDocMed(DocMed docMed) {
         this.docMed = docMed;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
