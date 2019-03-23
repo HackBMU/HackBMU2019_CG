@@ -203,9 +203,83 @@ public class AddEventActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
-                            Uri downloadUr = task.getResult();
-                            Log.e("uriOverview",downloadUr.toString());
-                            eventDetails.setOverviewURL(downloadUr.toString());
+                            Uri downloadUri = task.getResult();
+
+                            eventDetails.setOverviewURL(downloadUri.toString());
+                            Log.e("uriOverview",eventDetails.getOverviewURL());
+                            filepathCloseup = mStorage.child(phoneNumber).child(closeupUri.getLastPathSegment());
+
+                            UploadTask uploadTask2 = filepathCloseup.putFile(closeupUri);
+
+                            uploadTask2.addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle unsuccessful uploads
+                                    Log.e("Closeup ", exception+"");
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(AddEventActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+
+                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                    // ...
+                                }
+                            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                }
+                            });
+
+                            Task<Uri> urlTask2 = uploadTask2.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task2) throws Exception {
+                                    if (!task2.isSuccessful()) {
+                                        throw task2.getException();
+                                    }
+                                    return filepathCloseup.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task2) {
+                                    if (task2.isSuccessful()) {
+                                        Uri downloadUri = task2.getResult();
+                                        Log.e("uriCloseup",downloadUri.toString());
+                                        eventDetails.setCloseupURL(downloadUri.toString());
+                                        eventDetails.setDate(formattedDate);
+                                        eventDetails.setTitle(title.getText().toString());
+                                        eventDetails.setDescription(aboutProblem.getText().toString());
+                                        eventDetails.setAllergies(allergies.getText().toString());
+                                        eventDetails.setCurrentMed(currentMed.getText().toString());
+                                        eventDetails.setUserId(phoneNumber);
+                                        if (n == 1) {
+                                            eventDetails.setDuration("Days");
+                                        } else if (n == 2) {
+                                            eventDetails.setDuration("Weeks");
+                                        } else if (n == 3) {
+                                            eventDetails.setDuration("Months");
+                                        } else {
+                                            eventDetails.setDuration("Years");
+                                        }
+                                        if (x == 1) {
+                                            eventDetails.setSex("Male");
+                                        } else {
+                                            eventDetails.setSex("Female");
+                                        }
+                                        String eventId = databaseReference.child("event").push().getKey();
+                                        databaseReference.child("event").child(eventId).setValue(eventDetails);
+                                        databaseReference.child("patientDetails").child(phoneNumber).child("posts").child(eventId).setValue(eventId);
+                                        progress.hide();
+                                        startActivity(new Intent(AddEventActivity.this, PatientDashboardActivity.class));
+                                        finish();
+                                        MDToast.makeText(AddEventActivity.this, "Posted Successfully", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                                    } else {
+                                        // Handle failures
+                                        // ...
+                                    }
+                                }
+                            });
+
                         } else {
                         }
                     }
@@ -214,81 +288,10 @@ public class AddEventActivity extends AppCompatActivity {
 
 //Closeup Image
 
-                filepathCloseup = mStorage.child(phoneNumber).child(closeupUri.getLastPathSegment());
-
-                UploadTask uploadTask2 = filepathCloseup.putFile(closeupUri);
-
-                uploadTask2.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        Log.e("Closeup ", exception+"");
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(AddEventActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
-
-                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                        // ...
-                    }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    }
-                });
-
-                Task<Uri> urlTask2 = uploadTask2.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task2) throws Exception {
-                        if (!task2.isSuccessful()) {
-                            throw task2.getException();
-                        }
-                        return filepathCloseup.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task2) {
-                        if (task2.isSuccessful()) {
-                            Uri downloadUri = task2.getResult();
-                            Log.e("uriCloseup",downloadUri.toString());
-                            eventDetails.setCloseupURL(downloadUri.toString());
-                        } else {
-                            // Handle failures
-                            // ...
-                        }
-                    }
-                });
 
 
 
-                eventDetails.setDate(formattedDate);
-                eventDetails.setTitle(title.getText().toString());
-                eventDetails.setDescription(aboutProblem.getText().toString());
-                eventDetails.setAllergies(allergies.getText().toString());
-                eventDetails.setCurrentMed(currentMed.getText().toString());
-                eventDetails.setUserId(phoneNumber);
-                if (n == 1) {
-                    eventDetails.setDuration("Days");
-                } else if (n == 2) {
-                    eventDetails.setDuration("Weeks");
-                } else if (n == 3) {
-                    eventDetails.setDuration("Months");
-                } else {
-                    eventDetails.setDuration("Years");
-                }
-                if (x == 1) {
-                    eventDetails.setSex("Male");
-                } else {
-                    eventDetails.setSex("Female");
-                }
-                String eventId = databaseReference.child("event").push().getKey();
-                databaseReference.child("event").child(eventId).setValue(eventDetails);
-                databaseReference.child("patientDetails").child(phoneNumber).child("posts").child(eventId).setValue(eventId);
-                progress.hide();
-                startActivity(new Intent(AddEventActivity.this, PatientDashboardActivity.class));
-                finish();
-                MDToast.makeText(AddEventActivity.this, "Posted Successfully", MDToast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+
             }
         });
 
