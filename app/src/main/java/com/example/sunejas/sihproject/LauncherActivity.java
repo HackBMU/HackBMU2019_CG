@@ -19,11 +19,13 @@ public class LauncherActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String restoredRole = prefs.getString("role", null);
-        if (restoredRole!=null) {
+        if (restoredRole != null) {
             if(restoredRole.equals("patient")){
                 startActivity(new Intent(LauncherActivity.this,PatientDashboardActivity.class));
+                finish();
             }else if(restoredRole.equals("doctor")){
                 startActivity(new Intent(LauncherActivity.this,DoctorDashboardActivity.class));
+                finish();
             }
         }else {
             startActivity(new Intent(LauncherActivity.this,MainActivity.class));
