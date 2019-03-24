@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.example.sunejas.sihproject.Models.DoctorDetails;
 import com.example.sunejas.sihproject.Models.PatientDetails;
-import com.example.sunejas.sihproject.Utilities.GetRoundedImage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,12 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.et_reg_password);
         submit = (TextView) findViewById(R.id.tv_reg_submit);
         view = findViewById(R.id.rl_main_view);
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.arrived_qr);
-        GetRoundedImage getRoundedImage = new GetRoundedImage();
-        Bitmap circularBitmap = getRoundedImage.getRoundedShape(bitmap);
-
-        ImageView circularImageView = (ImageView) findViewById(R.id.doctor_image);
-        circularImageView.setImageBitmap(circularBitmap);
+        ImageView imageView = (ImageView) findViewById(R.id.doctor_image);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         submit.setOnClickListener(new View.OnClickListener() {
 

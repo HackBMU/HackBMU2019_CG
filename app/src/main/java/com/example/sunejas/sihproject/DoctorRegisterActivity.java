@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.example.sunejas.sihproject.Fragments.FragmentOtpChecker;
 import com.example.sunejas.sihproject.Models.DoctorDetails;
-import com.example.sunejas.sihproject.Utilities.GetRoundedImage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -61,12 +60,8 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Fragmen
         specialization =(EditText)findViewById(R.id.et_reg_specialisation);
         licenseNumber=(EditText)findViewById(R.id.et_reg_license);
         view =  findViewById(R.id.rl_main_view);
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),R.drawable.arrived_qr);
-        GetRoundedImage getRoundedImage=new GetRoundedImage();
-        Bitmap circularBitmap =getRoundedImage.getRoundedShape(bitmap);
 
-        ImageView circularImageView = (ImageView)findViewById(R.id.doctor_image);
-        circularImageView.setImageBitmap(circularBitmap);
+        ImageView imageView = (ImageView)findViewById(R.id.doctor_image);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Registering You");

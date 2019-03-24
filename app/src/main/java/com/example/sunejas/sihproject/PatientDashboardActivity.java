@@ -125,7 +125,7 @@ public class PatientDashboardActivity extends AppCompatActivity {
 
 
                 MDToast.makeText(PatientDashboardActivity.this, "Logout Success", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
-                startActivity(new Intent(PatientDashboardActivity.this, LoginActivity.class));
+                startActivity(new Intent(PatientDashboardActivity.this, MainActivity.class));
                 finish();
                 return true;
 

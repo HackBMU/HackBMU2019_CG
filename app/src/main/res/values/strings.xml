@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">SihProject</string>
     <string name="send_sms_api">https://2factor.in/API/V1/9983a223-ae79-11e6-a40f-00163ef91450/SMS/</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="introtxt1">Take overview and close up photos of your skin problem</string>
+    <string name="introtxt2">Fill your information along with your problem and send to our Dermatologists</string>
+    <string name="introtxt3">A doctor will send you prescription within hours. Meanwhile, check the status of your process</string>
+    <string name="introtxt4">Have another query? Chat directly with your doctor!</string>
+    <string name="introtxt5">Find health care centers near you</string>
 </resources>

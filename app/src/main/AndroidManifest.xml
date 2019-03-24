@@ -18,8 +18,6 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,10 +31,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".PatientRegisterActivity" />
+        <activity android:name=".PatientRegisterActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".PatientDashboardActivity" />
-        <activity android:name=".DoctorRegisterActivity" />
+        <activity android:name=".DoctorRegisterActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".MainActivity"
@@ -45,15 +45,24 @@
         <activity android:name=".LauncherActivity">
 
         </activity>
-        <activity
-            android:name=".AddEventActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
-        <activity android:name=".ChatPage.ChatActivity">
+
+        <activity android:name=".AppIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AddEventActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
+        <activity android:name=".ChatPage.ChatActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

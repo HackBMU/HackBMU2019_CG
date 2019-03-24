@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.sunejas.sihproject.Models.EventDetails;
 import com.example.sunejas.sihproject.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -39,9 +40,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHoder> {
     public void onBindViewHolder(MyHoder holder, int position) {
         EventDetails mylist = list.get(position);
         Long date=mylist.getDate();
-        Toast.makeText(context, "pahoch gye", Toast.LENGTH_SHORT).show();
-        Log.d("logger", "pahoch gye");
-        SimpleDateFormat df = new SimpleDateFormat("dd/MMM/yyyy");
+        if (list.get(position).getAssignedDoc() != 0) {
+            holder.assignedTo.setText("Assigned to: " + String.valueOf(list.get(position).getAssignedDoc()));
+        } else {
+            holder.assignedTo.setText("Assigned to: None");
+        }
+        holder.name.setText(list.get(position).getName());
+        Toast.makeText(context, list.get(position).getCloseupImage(), Toast.LENGTH_SHORT).show();
+        Picasso.get().load(list.get(position).getCloseupImage()).into(holder.closeUpImage);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = df.format(date);
         holder.date.setText(formattedDate);
     }
@@ -49,28 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHoder> {
     @Override
     public int getItemCount() {
 
-        int arr = 0;
-
-        try{
-            if(list.size()==0){
-
-                arr = 0;
-
-            }
-            else{
-
-                arr=list.size();
-            }
-
-
-
-        }catch (Exception e){
-
-
-
-        }
-
-        return arr;
+        return list.size();
 
     }
 

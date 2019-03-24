@@ -17,17 +17,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sunejas.sihproject.Fragments.FragmentOtpChecker;
 import com.example.sunejas.sihproject.Models.PatientDetails;
-import com.example.sunejas.sihproject.Utilities.GetRoundedImage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -61,12 +58,8 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
         userBloodGroup=(EditText)findViewById(R.id.et_reg_blood_group);
         userAge=(EditText)findViewById(R.id.et_reg_patient_age);
         view = findViewById(R.id.rl_main_view);
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),R.drawable.arrived_qr);
-        GetRoundedImage getRoundedImage=new GetRoundedImage();
-        Bitmap circularBitmap =getRoundedImage.getRoundedShape(bitmap);
 
-        ImageView circularImageView = (ImageView)findViewById(R.id.doctor_image);
-        circularImageView.setImageBitmap(circularBitmap);
+        ImageView imageView = (ImageView)findViewById(R.id.doctor_image);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Registering You");
