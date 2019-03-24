@@ -11,6 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sunejas.sihproject.Adapter.PostAdapter;
@@ -34,18 +38,63 @@ public class DoctorDashboardActivity extends AppCompatActivity {
     private long docPhone;
     SharedPreferences prefs;
 
+    LinearLayout splReqLL, appointmentLL, tagsLL;
+    Button viewCurrentCaseButton;
+    TextView postsTextView, reviewedCaseTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         setContentView(R.layout.activity_doctor_dashboard);
+
+        splReqLL = findViewById(R.id.ll_spl_req);
+        appointmentLL = findViewById(R.id.ll_appointment);
+        tagsLL = findViewById(R.id.ll_tag);
+
+        postsTextView = findViewById(R.id.tv_posts);
+        postsTextView.setVisibility(View.GONE);
+
+        reviewedCaseTextView = findViewById(R.id.tv_reviewed_cases);
+        reviewedCaseTextView.setVisibility(View.GONE);
+
+        splReqLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DoctorDashboardActivity.this, "Launch list of requests", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        appointmentLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DoctorDashboardActivity.this, "Launch list of physical appointments", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tagsLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DoctorDashboardActivity.this, "Launch list of specialised tags", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        viewCurrentCaseButton = findViewById(R.id.btn_view_curr_case);
+
+        viewCurrentCaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent=new Intent(DoctorDashboardActivity.this,SingleEventDoctorActivity.class);
+               startActivity(intent);
+            }
+        });
+
         eventList = new ArrayList<>();
         adapter = new PostAdapter(eventList, getApplicationContext());
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_admin_club_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setAdapter(adapter);
-
 
         String phone = prefs.getString("phone", null);
         docPhone = Long.parseLong(phone);
@@ -79,9 +128,11 @@ public class DoctorDashboardActivity extends AppCompatActivity {
                         Log.d("database: ", dataSnapshot.toString());
                         EventDetails details = dataSnapshot.getValue(EventDetails.class);
                         eventList.add(details);
+                        postsTextView.setVisibility(View.VISIBLE);
 
-                        if(details.getAssignedDoc() == docPhone) {
+                        if (details.getAssignedDoc() == docPhone) {
                             reviewedList.add(details);
+                            reviewedCaseTextView.setVisibility(View.VISIBLE);
                             reviewedAdapter.notifyDataSetChanged();
                         }
                         Toast.makeText(DoctorDashboardActivity.this, String.valueOf(eventList.size()), Toast.LENGTH_SHORT).show();
@@ -114,6 +165,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
             mDatabaseReference.addChildEventListener(mChildEventListener);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_logout, menu);
@@ -122,8 +174,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.menu_logout:
                 prefs.edit().clear().apply();
 

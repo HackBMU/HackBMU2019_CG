@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:orientation="vertical"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context=".PatientDashboardActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,11 +35,12 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_gravity="center"
         android:id="@+id/ll_prev_event"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="0.7"
         android:padding="5dp">
 
@@ -82,11 +83,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:textColor="#000"
             android:fontFamily="@font/rock"
             android:gravity="center"
-            android:text="Something happens because of Something"
+            android:text="Because We Care For Your Health"
             android:textAlignment="center"
+            android:textColor="#000"
             android:textSize="17sp" />
 
         <LinearLayout
@@ -106,19 +107,19 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:src="@drawable/noun_location_2248144" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:lines="2"
                     android:layout_marginTop="6dp"
-                    android:textColor="#000"
-                    android:gravity="center"
                     android:fontFamily="@font/rock"
-                    android:text="Nearby Clinics" />
+                    android:gravity="center"
+                    android:lines="2"
+                    android:text="Nearby Clinics"
+                    android:textColor="#000" />
             </LinearLayout>
 
             <LinearLayout
@@ -131,19 +132,19 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:src="@drawable/noun_doctor_803518" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/rock"
-                    android:lines="2"
                     android:layout_marginTop="6dp"
-                    android:textColor="#000"
+                    android:fontFamily="@font/rock"
                     android:gravity="center"
-                    android:text="Featured Doctor" />
+                    android:lines="2"
+                    android:text="Featured Doctor"
+                    android:textColor="#000" />
 
             </LinearLayout>
 
@@ -156,20 +157,20 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:src="@drawable/noun_book_2254023" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rock"
-                    android:lines="2"
-                    android:textColor="#000"
-                    android:gravity="center"
                     android:layout_marginTop="6dp"
+                    android:fontFamily="@font/rock"
+                    android:gravity="center"
+                    android:lines="2"
+                    android:text="Skin Guide"
                     android:textAlignment="center"
-                    android:text="Skin Guide" />
+                    android:textColor="#000" />
 
             </LinearLayout>
 
@@ -190,15 +191,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rock"
-                    android:lines="2"
                     android:layout_marginTop="6dp"
-                    android:textColor="#000"
+                    android:fontFamily="@font/rock"
                     android:gravity="center"
-                    android:text="FAQ &amp; Queries" />
+                    android:lines="2"
+                    android:text="FAQ &amp; Queries"
+                    android:textColor="#000" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 

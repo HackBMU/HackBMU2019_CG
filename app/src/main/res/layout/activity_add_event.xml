@@ -10,41 +10,44 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/toolbar"
-            android:alpha="0.6">
+            android:alpha="0.6"
+            android:background="@color/colorPrimaryDark">
+
             <ImageView
+                android:id="@+id/back_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:padding="10dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:id="@+id/back_btn"
-                android:src="@drawable/ic_arrow_back_black_24dp"
-                />
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New ISSUE"
                 android:layout_centerVertical="true"
-                android:textSize="22sp"
-                android:fontFamily="@font/bebasneue_bold1"
-                android:layout_toRightOf="@+id/back_btn"
                 android:layout_marginLeft="5dp"
-                android:textColor="#fff"/>
+                android:layout_toRightOf="@+id/back_btn"
+                android:fontFamily="@font/bebasneue_bold1"
+                android:text="New ISSUE"
+                android:textColor="#fff"
+                android:textSize="22sp" />
 
         </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/ll_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_below="@+id/toolbar"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,23 +64,24 @@
                 android:textColor="#296aa6"
                 android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_date"
+            android:layout_alignParentLeft="true"
             android:layout_margin="10dp"
-            android:orientation="horizontal"
-  android:layout_below="@+id/ll_date"
-            android:layout_alignParentLeft="true">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fill the following details:-"
-                android:textStyle="bold"
-                android:textSize="17sp"
                 android:fontFamily="@font/rock"
-                android:textColor="#4a4a4a"/>
+                android:text="Fill the following details:-"
+                android:textColor="#4a4a4a"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -86,10 +90,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/heading"
-            android:textColor="#296aa6"
             android:layout_centerHorizontal="true"
-           android:fontFamily="@font/rock"
+            android:fontFamily="@font/rock"
             android:text="Please provide 2 pictures tapping the icon"
+            android:textColor="#296aa6"
             android:textSize="15sp" />
 
 
@@ -187,10 +191,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_image"
             android:layout_margin="15dp"
-            android:textColor="#4a4a4a"
-            android:textStyle="bold"
             android:text="How long you had this condition?"
-            android:textSize="17sp" />
+            android:textColor="#4a4a4a"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/ll_duration"
@@ -205,12 +209,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/addevent_background"
+                android:fontFamily="@font/rock"
                 android:gravity="center"
                 android:padding="11dp"
                 android:text="Days"
-                android:fontFamily="@font/rock"
                 android:textColor="#fff"
-                android:background="@drawable/addevent_background"
                 android:textSize="15sp" />
 
             <TextView
@@ -219,26 +223,26 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/addevent_background"
+                android:fontFamily="@font/rock"
                 android:gravity="center"
                 android:padding="11dp"
-                android:fontFamily="@font/rock"
-                android:textColor="#fff"
-                android:background="@drawable/addevent_background"
                 android:text="Weeks"
+                android:textColor="#fff"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_months"
                 android:layout_width="0dp"
-                android:textColor="#fff"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
-                android:fontFamily="@font/rock"
-                android:background="@drawable/addevent_background"
                 android:layout_weight="1"
+                android:background="@drawable/addevent_background"
+                android:fontFamily="@font/rock"
                 android:gravity="center"
                 android:padding="11dp"
                 android:text="Months"
+                android:textColor="#fff"
                 android:textSize="15sp" />
 
             <TextView
@@ -247,12 +251,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:fontFamily="@font/rock"
-                android:padding="11dp"
                 android:background="@drawable/addevent_background"
+                android:fontFamily="@font/rock"
+                android:gravity="center"
+                android:padding="11dp"
                 android:text="Years"
+                android:textColor="#fff"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -262,10 +266,10 @@
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/et_bg"
             android:layout_below="@+id/ll_duration"
-            android:fontFamily="@font/rock"
             android:layout_margin="10dp"
+            android:background="@drawable/et_bg"
+            android:fontFamily="@font/rock"
             android:hint="Title" />
 
 
@@ -299,25 +303,25 @@
             <TextView
                 android:id="@+id/tv_current_med"
                 android:layout_width="0dp"
-                android:layout_weight="1.5"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:layout_weight="1.5"
                 android:lines="2"
-                android:textColor="#4a4a4a"
-                android:textStyle="bold"
                 android:text="Are you taking some self medicine? Click to add"
-                android:textSize="17sp" />
+                android:textColor="#4a4a4a"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/iv_add"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
                 android:layout_toRightOf="@id/tv_current_med"
+                android:layout_weight="0.2"
                 android:background="@drawable/vector_add" />
         </LinearLayout>
 
@@ -334,15 +338,15 @@
             android:id="@+id/button_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="#fff"
-            android:background="@drawable/button_background"
             android:layout_below="@+id/ll_current_med"
             android:layout_centerHorizontal="true"
-            android:text="POST" />
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:text="POST"
+            android:textColor="#fff" />
     </RelativeLayout>
 
 </ScrollView>

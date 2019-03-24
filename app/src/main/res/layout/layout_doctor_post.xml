@@ -11,9 +11,10 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:elevation="3dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="20dp">
 
         <RelativeLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

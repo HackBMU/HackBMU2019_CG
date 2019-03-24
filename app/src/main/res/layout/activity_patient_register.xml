@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PatientRegisterActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,14 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2.0"
-            android:background="#fff"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:background="#d8d8d8"/>
+            android:background="#fff" />
 
     </LinearLayout>
 
@@ -37,20 +31,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.45"
-        android:layout_marginTop="40dp"
-        android:gravity="center">
+        <RelativeLayout
+            android:id="@+id/rl_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp"
+            android:layout_weight="0.45"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/patient_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/noun_patient_650722"/>
+                android:src="@drawable/noun_patient_650722" />
 
             <TextView
                 android:id="@+id/app_name"
@@ -58,10 +52,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/patient_image"
-                android:text="DOCT-AID"
                 android:fontFamily="@font/bebasneue_bold1"
+                android:text="DOCT-AID"
                 android:textColor="#296aa6"
-                android:textSize="28.7sp"/>
+                android:textSize="28.7sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,24 +63,24 @@
                 android:layout_below="@+id/app_name"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/patient_image"
-                android:text="PATIENT SIGNUP"
                 android:fontFamily="@font/bebasneue_bold1"
+                android:text="PATIENT SIGNUP"
                 android:textColor="#fcfcfc"
                 android:textSize="28.7sp" />
 
         </RelativeLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/rl_main_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2.5"
-        android:layout_below="@+id/rl_top"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        app:cardBackgroundColor="#ededed"
-        app:cardCornerRadius="6dp">
+        <android.support.v7.widget.CardView
+            android:id="@+id/rl_main_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/rl_top"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="2.5"
+            app:cardBackgroundColor="#ededed"
+            app:cardCornerRadius="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,12 +97,12 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
                     android:hint="Name"
-                    android:singleLine="true"
-                    android:textSize="13sp"
-                    android:textColor="#000"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:textColorHint="#808080"/>
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
 
                 <EditText
@@ -127,9 +121,9 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:singleLine="true"
-                    android:textSize="13sp"
                     android:textColor="#000"
-                    android:textColorHint="#808080"/>
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/et_reg_city"
@@ -146,9 +140,9 @@
                     android:paddingLeft="13dp"
                     android:paddingRight="13dp"
                     android:singleLine="true"
-                    android:textSize="13sp"
                     android:textColor="#000"
-                    android:textColorHint="#808080"/>
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
 
                 <EditText
@@ -168,9 +162,9 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:singleLine="true"
-                    android:textSize="13sp"
                     android:textColor="#000"
-                    android:textColorHint="#808080"/>
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/et_reg_password"
@@ -188,9 +182,9 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:singleLine="true"
-                    android:textSize="13sp"
                     android:textColor="#000"
-                    android:textColorHint="#808080"/>
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/et_reg_blood_group"
@@ -207,9 +201,9 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:singleLine="true"
-                    android:textSize="13sp"
                     android:textColor="#000"
-                    android:textColorHint="#808080"/>
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/et_reg_patient_age"
@@ -228,9 +222,9 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:singleLine="true"
-                    android:textSize="13sp"
                     android:textColor="#000"
-                    android:textColorHint="#808080"/>
+                    android:textColorHint="#808080"
+                    android:textSize="13sp" />
 
 
                 <TextView
@@ -243,29 +237,30 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/button_background"
+                    android:fontFamily="@font/rockb"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="Register"
                     android:textColor="#fff"
                     android:textSize="18dp"
-                    android:fontFamily="@font/rockb"
                     android:textStyle="bold" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <TextView
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/rl_main_view"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="Login ? Tap Here!"
-            android:textColor="#8b8b8b"
+            android:layout_weight="0.3"
             android:fontFamily="@font/rockb"
-            android:textSize="18sp"
-            android:id="@+id/login"/>
+            android:text="Login ? Tap Here!"
+            android:textAlignment="center"
+            android:textColor="#8b8b8b"
+            android:textSize="18sp" />
 
 
     </LinearLayout>

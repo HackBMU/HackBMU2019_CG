@@ -1,16 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingleEventDoctorActivity">
 
-    <TextView
+    tools:context=".AddEventActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date: "
+                android:textColor="#296aa6"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/today_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/01/2001"
+                android:textColor="#296aa6"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_date"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Case Pictures"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:fontFamily="@font/rock"
+                android:textColor="#4a4a4a"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heading"
+            android:textColor="#296aa6"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rock"
+            android:text="Pictures provided by the patient"
+            android:textSize="15sp" />
+
+
+        <LinearLayout
+            android:id="@+id/rl_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_pictures"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rl_closeup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="#D3D3D3"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="35dp">
+
+                    <TextView
+                        android:id="@+id/tv_closeup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_closeup"
+                        android:text="Image"
+                        android:textSize="17sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="165dp" />
+
+                <ImageView
+                    android:id="@+id/iv_closeup_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_overview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@+id/rl_closeup"
+                android:layout_weight="1"
+                android:background="#D3D3D3"
+                android:gravity="center">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="35dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_overview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_overview"
+                        android:text="Image"
+                        android:textSize="17sp" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="165dp" />
+                <ImageView
+                    android:id="@+id/iv_overview_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_image"
+            android:layout_margin="15dp"
+            android:textColor="#4a4a4a"
+            android:textStyle="bold"
+            android:text="How long you had this condition?"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_duration"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:id="@+id/tv_days"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Days"
+                android:fontFamily="@font/rock"
+                android:textColor="#fff"
+                android:background="@drawable/addevent_background"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_weeks"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:padding="5dp"
+                android:fontFamily="@font/rock"
+                android:textColor="#fff"
+                android:background="@drawable/addevent_background"
+                android:text="Weeks"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_months"
+                android:layout_width="0dp"
+                android:textColor="#fff"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/rock"
+                android:background="@drawable/addevent_background"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Months"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_years"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:fontFamily="@font/rock"
+               android:padding="5dp"
+                android:background="@drawable/addevent_background"
+                android:text="Years"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/et_title"
+           android:fontFamily="@font/rock"
+           android:layout_below="@id/ll_duration"
+           android:layout_marginTop="20dp"
+           android:layout_marginLeft="10dp"
+           android:textSize="16sp"
+           android:textColor="#9b9b9b"
+           android:text="Title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ans1"
+            android:fontFamily="@font/rock"
+            android:layout_below="@id/et_title"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textColor="#296aa6"
+            android:text="ans1"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_comment"
+            android:fontFamily="@font/rock"
+            android:textColor="#9b9b9b"
+            android:layout_below="@id/et_title"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:text="Comments"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ans2"
+            android:fontFamily="@font/rock"
+            android:layout_below="@id/et_comment"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textColor="#296aa6"
+            android:text="ans2"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_allergy"
+            android:fontFamily="@font/rock"
+            android:layout_below="@id/ans2"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#9b9b9b"
+            android:textSize="16sp"
+            android:text="Allergy"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ans3"
+            android:fontFamily="@font/rock"
+            android:layout_below="@id/et_allergy"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textColor="#296aa6"
+            android:text="ans3"/>
+        <EditText
+            android:id="@+id/et_about_problem"
+            android:layout_width="match_parent"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="70dp"
+
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ans3"
+            android:layout_margin="10dp"
+            android:background="@drawable/et_bg2"
+            android:fontFamily="@font/rock"
+            android:hint="Prescription"
+             />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_below="@id/et_about_problem"
+    android:id="@+id/ll1"
+    >
+
+    <Button
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:text="PRESCRIBE"
+        android:layout_below="@id/ll1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_background"
+        android:textColor="#fff"/>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:fontFamily="@font/rock"
-        android:text="Date: 02-03-2019" />
+        android:orientation="vertical">
+       <ImageView
+           android:layout_width="60dp"
+           android:layout_height="60dp"
+           android:layout_marginRight="7dp"
+           android:background="@drawable/vector_msg"
+           />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CHAT"
+            android:textColor="#a6a6a6"
+            android:fontFamily="@font/rock"
+            android:padding="5dp"
+            android:layout_marginRight="7dp"
+            android:textSize="15sp"/>
 
-</RelativeLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>

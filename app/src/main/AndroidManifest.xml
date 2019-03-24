@@ -31,49 +31,60 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".MainActivity"></activity>
+
         <activity
             android:name=".PatientRegisterActivity"
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:name=".MainActivity" />
+
         <activity
             android:name=".PatientDashboardActivity"
-            android:theme="@style/AppTheme1" />
+            android:label="Patient Dashboard" />
+
         <activity
             android:name=".DoctorRegisterActivity"
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
         <activity android:name=".DoctorDashboardActivity" />
-        <activity android:name=".LauncherActivity">
+
+        <activity android:name=".LauncherActivity"></activity>
+
+        <activity android:name=".AppIntroActivity"></activity>
+
+        <activity
+            android:name=".AddEventActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity android:name=".ChatPage.ChatActivity"></activity>
+
+        <activity
+            android:name=".SingleEventDoctorActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <activity
+            android:name=".FeaturedDoctorActivity"
+            android:theme="@style/AppTheme1" />
+
+        <activity
+            android:name=".FAQActivity"
+            android:theme="@style/AppTheme1"></activity>
+
+        <activity android:name=".Splash_Screen_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddEventActivity"
-            android:theme="@style/AppTheme1"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".ChatPage.ChatActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".SingleEventDoctorActivity" />
-        <activity
-            android:name=".FeaturedDoctorActivity"
-            android:theme="@style/AppTheme1" />
-        <activity android:name=".FAQActivity"
-            android:theme="@style/AppTheme1"></activity>
     </application>
 
 </manifest>
