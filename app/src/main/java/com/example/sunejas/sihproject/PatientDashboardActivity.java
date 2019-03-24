@@ -2,22 +2,23 @@ package com.example.sunejas.sihproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.sunejas.sihproject.Adapter.PostAdapter;
 import com.example.sunejas.sihproject.Models.EventDetails;
-import com.example.sunejas.sihproject.Utilities.MovableFloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,15 +37,41 @@ public class PatientDashboardActivity extends AppCompatActivity {
     private ArrayList<EventDetails> eventList;
     private PostAdapter adapter;
     RecyclerView mRecyclerView;
+    LinearLayout featuredDoctors,faq;
+    ImageView logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_dashboard);
+        featuredDoctors=findViewById(R.id.featured_doctors);
+        featuredDoctors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PatientDashboardActivity.this,FeaturedDoctorActivity.class));
+            }
+        });
+        faq=findViewById(R.id.faq);
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PatientDashboardActivity.this,FAQActivity.class));
+            }
+        });
+        logoutButton=findViewById(R.id.logout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefs.edit().clear().apply();
+                MDToast.makeText(PatientDashboardActivity.this, "Logout Success", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                startActivity(new Intent(PatientDashboardActivity.this, MainActivity.class));
+                finish();
+            }
+        });
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         phoneNumber = prefs.getString("phone", null);
         eventList = new ArrayList<>();
-        MovableFloatingActionButton addNewEventFab = findViewById(R.id.add_new_event_fab);
+        Button addNewEventFab = findViewById(R.id.add_new_event_fab);
         addNewEventFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

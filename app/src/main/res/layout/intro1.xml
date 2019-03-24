@@ -10,7 +10,7 @@
         android:id="@+id/pic1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/slide1"
+        android:src="@drawable/vector_camera"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="150dp"
         android:layout_weight="2"/>
@@ -18,7 +18,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#ffffff"
+        android:background="#8080ff"
         android:layout_alignParentBottom="true">
 
 
@@ -27,10 +27,8 @@
             android:layout_height="140dp"
             android:textSize="20dp"
             android:layout_margin="10dp"
-            android:fontFamily="@font/rock"
-            android:textAlignment="center"
             android:text="@string/introtxt1"
-            android:textColor="#296aa6"
+            android:textColor="@color/cardview_light_background"
             android:layout_alignParentBottom="true"/>
 
 

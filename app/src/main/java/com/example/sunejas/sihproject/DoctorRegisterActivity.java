@@ -42,6 +42,7 @@ import static com.example.sunejas.sihproject.Fragments.FragmentOtpChecker.REQUES
 public class DoctorRegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus{
     private EditText name, email, phone, city,field,specialization,licenseNumber,password;
     private CardView view;
+    TextView login;
     private ProgressDialog mProgress;
     private DoctorDetails doctorDetails;
     private DatabaseReference databaseReference;
@@ -60,6 +61,14 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Fragmen
         specialization =(EditText)findViewById(R.id.et_reg_specialisation);
         licenseNumber=(EditText)findViewById(R.id.et_reg_license);
         view =  findViewById(R.id.rl_main_view);
+        login=findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DoctorRegisterActivity.this,LoginActivity.class));
+                finish();
+            }
+        });
 
         ImageView imageView = (ImageView)findViewById(R.id.doctor_image);
         databaseReference = FirebaseDatabase.getInstance().getReference();

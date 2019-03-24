@@ -41,6 +41,7 @@ import static com.example.sunejas.sihproject.Fragments.FragmentOtpChecker.REQUES
 
 public class PatientRegisterActivity extends AppCompatActivity implements FragmentOtpChecker.otpCheckStatus {
     private EditText userName, userEmail, userPhone, userCity,userBloodGroup,userAge,userPassword;
+    TextView login;
     private CardView view;
     private ProgressDialog mProgress;
     private PatientDetails patientDetails;
@@ -57,9 +58,17 @@ public class PatientRegisterActivity extends AppCompatActivity implements Fragme
         userPassword=(EditText)findViewById(R.id.et_reg_password);
         userBloodGroup=(EditText)findViewById(R.id.et_reg_blood_group);
         userAge=(EditText)findViewById(R.id.et_reg_patient_age);
+        login=findViewById(R.id.login);
         view = findViewById(R.id.rl_main_view);
 
         ImageView imageView = (ImageView)findViewById(R.id.doctor_image);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PatientRegisterActivity.this,LoginActivity.class));
+                finish();
+            }
+        });
         databaseReference = FirebaseDatabase.getInstance().getReference();
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Registering You");

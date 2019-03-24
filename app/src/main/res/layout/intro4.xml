@@ -10,7 +10,7 @@
         android:id="@+id/pic1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/slide4"
+        android:src="@drawable/vector_camera"
         android:layout_marginBottom="150dp"
         android:layout_weight="2"
         />
@@ -19,7 +19,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#ffffff"
+        android:background="#8080ff"
         android:layout_alignParentBottom="true">
 
 
@@ -29,9 +29,7 @@
             android:textSize="20dp"
             android:layout_margin="10dp"
             android:text="@string/introtxt4"
-            android:fontFamily="@font/rock"
-            android:textAlignment="center"
-            android:textColor="#296aa6"
+            android:textColor="@color/cardview_light_background"
             android:layout_alignParentBottom="true"/>
 
 

@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -31,39 +31,49 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".PatientRegisterActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".PatientDashboardActivity" />
-        <activity android:name=".DoctorRegisterActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity
+            android:name=".PatientRegisterActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".PatientDashboardActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".DoctorRegisterActivity"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".DoctorDashboardActivity" />
         <activity android:name=".LauncherActivity">
-
-        </activity>
-
-        <activity android:name=".AppIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AddEventActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".ChatPage.ChatActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".SingleEventDoctorActivity" />
+        <activity
+            android:name=".FeaturedDoctorActivity"
+            android:theme="@style/AppTheme1" />
+        <activity android:name=".FAQActivity"
+            android:theme="@style/AppTheme1"></activity>
     </application>
 
 </manifest>

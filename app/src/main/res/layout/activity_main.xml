@@ -44,8 +44,8 @@
                 android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="The e-First Aid"
-                android:textSize="15sp"
+                android:text="The eFirst Aid"
+                android:textSize="11sp"
                 android:layout_weight="0.2"
                 android:textColor="#296aa6"
                 android:fontFamily="@font/bebasneue_bold1"
@@ -84,7 +84,7 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_background"
-            android:text="Sign Up As Doctor"
+            android:text="Sign Up As Docotor"
             android:fontFamily="@font/rockb"
             android:textColor="@color/cardview_light_background"
             android:id="@+id/signup_doctor"/>
@@ -98,8 +98,6 @@
             android:text="Login? Tap Here!"
             android:background="#f8f6f5"
             android:fontFamily="@font/rockb"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="#6d6e71"
             android:id="@+id/login"/>
 
         <Button

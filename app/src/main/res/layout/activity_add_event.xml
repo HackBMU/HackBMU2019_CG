@@ -6,39 +6,91 @@
     android:background="#fff"
     tools:context=".AddEventActivity">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/toolbar"
+            android:alpha="0.6">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/back_btn"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New ISSUE"
+                android:layout_centerVertical="true"
+                android:textSize="22sp"
+                android:fontFamily="@font/bebasneue_bold1"
+                android:layout_toRightOf="@+id/back_btn"
+                android:layout_marginLeft="5dp"
+                android:textColor="#fff"/>
+
+        </RelativeLayout>
         <LinearLayout
             android:id="@+id/ll_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:layout_below="@+id/toolbar"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date: "
-                android:textSize="18sp" />
+                android:textColor="#296aa6"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/today_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01/01/2001"
-                android:textSize="18sp" />
+                android:textColor="#296aa6"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+  android:layout_below="@+id/ll_date"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fill the following details:-"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:fontFamily="@font/rock"
+                android:textColor="#4a4a4a"/>
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_pictures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_date"
+            android:layout_below="@+id/heading"
+            android:textColor="#296aa6"
             android:layout_centerHorizontal="true"
-            android:text="Please provide 2 pictures"
-            android:textSize="18sp" />
+           android:fontFamily="@font/rock"
+            android:text="Please provide 2 pictures tapping the icon"
+            android:textSize="15sp" />
 
 
         <LinearLayout
@@ -85,7 +137,7 @@
                 <ImageView
                     android:id="@+id/iv_closeup_back"
                     android:layout_width="match_parent"
-                    android:layout_height="165dp"
+                    android:layout_height="160dp"
                     android:scaleType="centerCrop" />
             </RelativeLayout>
 
@@ -124,7 +176,7 @@
                 <ImageView
                     android:id="@+id/iv_overview_back"
                     android:layout_width="match_parent"
-                    android:layout_height="165dp"
+                    android:layout_height="160dp"
                     android:scaleType="centerCrop" />
             </RelativeLayout>
         </LinearLayout>
@@ -135,8 +187,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_image"
             android:layout_margin="15dp"
+            android:textColor="#4a4a4a"
+            android:textStyle="bold"
             android:text="How long you had this condition?"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
         <LinearLayout
             android:id="@+id/ll_duration"
@@ -152,9 +206,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
+                android:padding="11dp"
                 android:text="Days"
-                android:textSize="18sp" />
+                android:fontFamily="@font/rock"
+                android:textColor="#fff"
+                android:background="@drawable/addevent_background"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_weeks"
@@ -163,20 +220,26 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
+                android:padding="11dp"
+                android:fontFamily="@font/rock"
+                android:textColor="#fff"
+                android:background="@drawable/addevent_background"
                 android:text="Weeks"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_months"
                 android:layout_width="0dp"
+                android:textColor="#fff"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
+                android:fontFamily="@font/rock"
+                android:background="@drawable/addevent_background"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
+                android:padding="11dp"
                 android:text="Months"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_years"
@@ -185,9 +248,12 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
+                android:textColor="#fff"
+                android:fontFamily="@font/rock"
+                android:padding="11dp"
+                android:background="@drawable/addevent_background"
                 android:text="Years"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -196,7 +262,9 @@
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/et_bg"
             android:layout_below="@+id/ll_duration"
+            android:fontFamily="@font/rock"
             android:layout_margin="10dp"
             android:hint="Title" />
 
@@ -207,7 +275,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/et_title"
             android:layout_margin="10dp"
-            android:hint="About Problem" />
+            android:background="@drawable/et_bg2"
+            android:fontFamily="@font/rock"
+            android:hint="Comments" />
 
         <EditText
             android:id="@+id/et_allergies"
@@ -215,6 +285,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/et_about_problem"
             android:layout_margin="10dp"
+            android:background="@drawable/et_bg2"
+            android:fontFamily="@font/rock"
             android:hint="Allergies(If any)" />
 
         <LinearLayout
@@ -231,8 +303,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:lines="2"
+                android:textColor="#4a4a4a"
+                android:textStyle="bold"
                 android:text="Are you taking some self medicine? Click to add"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/iv_add"
@@ -258,8 +332,14 @@
 
         <Button
             android:id="@+id/button_post"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#fff"
+            android:background="@drawable/button_background"
             android:layout_below="@+id/ll_current_med"
             android:layout_centerHorizontal="true"
             android:text="POST" />

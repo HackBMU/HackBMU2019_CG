@@ -4,10 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,13 +39,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.zip.Inflater;
 
 public class AddEventActivity extends AppCompatActivity {
     TextView currentDate, days, weeks, months, years;
     EditText title, aboutProblem, allergies;
     private ProgressDialog progress;
-    ImageView addMedImage;
+    ImageView addMedImage,backButton;
     LinearLayout llMedLayout;
     ArrayList<EditText> etMedArray;
     int n = 0, x = 0;
@@ -81,7 +80,13 @@ public class AddEventActivity extends AppCompatActivity {
         overview = findViewById(R.id.rl_overview);
         addMedImage = findViewById(R.id.iv_add);
         llMedLayout = findViewById(R.id.ll_current_med);
-
+        backButton=findViewById(R.id.back_btn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         ivCloseupBack = findViewById(R.id.iv_closeup_back);
         ivOverviewBack = findViewById(R.id.iv_overview_back);
 
@@ -98,20 +103,20 @@ public class AddEventActivity extends AppCompatActivity {
         days.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                days.setBackgroundColor(Color.CYAN);
-                weeks.setBackgroundColor(Color.WHITE);
-                months.setBackgroundColor(Color.WHITE);
-                years.setBackgroundColor(Color.WHITE);
+                days.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background2));
+                weeks.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                months.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                years.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
                 n = 1;
             }
         });
         weeks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                weeks.setBackgroundColor(Color.CYAN);
-                days.setBackgroundColor(Color.WHITE);
-                months.setBackgroundColor(Color.WHITE);
-                years.setBackgroundColor(Color.WHITE);
+                weeks.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background2));
+                days.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                months.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                years.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
                 n = 2;
             }
         });
@@ -119,10 +124,10 @@ public class AddEventActivity extends AppCompatActivity {
         months.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                months.setBackgroundColor(Color.CYAN);
-                weeks.setBackgroundColor(Color.WHITE);
-                days.setBackgroundColor(Color.WHITE);
-                years.setBackgroundColor(Color.WHITE);
+                months.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background2));
+                weeks.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                days.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                years.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
                 n = 3;
             }
         });
@@ -130,10 +135,10 @@ public class AddEventActivity extends AppCompatActivity {
         years.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                years.setBackgroundColor(Color.CYAN);
-                weeks.setBackgroundColor(Color.WHITE);
-                months.setBackgroundColor(Color.WHITE);
-                days.setBackgroundColor(Color.WHITE);
+                years.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background2));
+                weeks.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                months.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
+                days.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.addevent_background));
                 n = 4;
             }
         });

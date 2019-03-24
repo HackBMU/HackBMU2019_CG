@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FAQActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/toolbar"
+        android:alpha="0.6">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/back_btn"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAQs"
+            android:layout_centerVertical="true"
+            android:textSize="22sp"
+            android:fontFamily="@font/bebasneue_bold1"
+            android:layout_toRightOf="@+id/back_btn"
+            android:layout_marginLeft="5dp"
+            android:textColor="#fff"/>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="250dp"
@@ -10,7 +11,8 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:elevation="3dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="10dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -19,40 +21,40 @@
                 android:id="@+id/post_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="fitXY"
-                />
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/vname"
                 android:layout_width="wrap_content"
-                android:text="Name:"
-                android:textAllCaps="true"
-                android:layout_margin="5dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/post_image"
+                android:layout_margin="5dp"
+                android:text="Name:"
+                android:textAllCaps="true"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/post_date"
-                android:text="Date:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/post_image"
-                android:textSize="15sp"
+                android:layout_alignParentRight="true"
                 android:layout_margin="5dp"
-                android:layout_alignParentRight="true"/>
+                android:text="Date:"
+                android:textSize="15sp" />
+
             <TextView
+                android:id="@+id/assigned_doctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/assigned_doctor"
                 android:layout_below="@+id/post_date"
                 android:layout_alignParentRight="true"
-                android:text="Assigned To: "
                 android:layout_margin="5dp"
-                android:textSize="15sp"/>
+                android:text="Assigned To: "
+                android:textSize="15sp" />
 
 
-</RelativeLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

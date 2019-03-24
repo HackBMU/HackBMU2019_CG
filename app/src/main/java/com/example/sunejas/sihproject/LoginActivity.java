@@ -30,7 +30,7 @@ import com.valdesekamdem.library.mdtoast.MDToast;
 
 public class LoginActivity extends AppCompatActivity {
     EditText phoneNumber, password;
-    TextView submit;
+    TextView submit,signUp;
     ProgressDialog pd;
     String pass;
     Integer checker = 0;
@@ -49,6 +49,13 @@ public class LoginActivity extends AppCompatActivity {
         submit = (TextView) findViewById(R.id.tv_reg_submit);
         view = findViewById(R.id.rl_main_view);
         ImageView imageView = (ImageView) findViewById(R.id.doctor_image);
+        signUp=findViewById(R.id.sign_up);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            }
+        });
         databaseReference = FirebaseDatabase.getInstance().getReference();
         submit.setOnClickListener(new View.OnClickListener() {
 
