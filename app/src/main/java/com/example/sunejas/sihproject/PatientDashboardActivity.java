@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.sunejas.sihproject.Adapter.PostAdapter;
 import com.example.sunejas.sihproject.Models.EventDetails;
+import com.example.sunejas.sihproject.NearbyClinicPage.MapsActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,13 +38,20 @@ public class PatientDashboardActivity extends AppCompatActivity {
     private ArrayList<EventDetails> eventList;
     private PostAdapter adapter;
     RecyclerView mRecyclerView;
-    LinearLayout featuredDoctors,faq;
+    LinearLayout featuredDoctors,faq,nearbyClinics;
     ImageView logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_dashboard);
+        nearbyClinics=findViewById( R.id.nearby_clinics );
+        nearbyClinics.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent( PatientDashboardActivity.this,MapsActivity.class ) );
+            }
+        } );
         featuredDoctors=findViewById(R.id.featured_doctors);
         featuredDoctors.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +113,7 @@ public class PatientDashboardActivity extends AppCompatActivity {
                     try {
                         Log.d("database: ", dataSnapshot.toString());
                         EventDetails details = dataSnapshot.getValue(EventDetails.class);
+                        details.setUserkey(dataSnapshot.getKey());
                         eventList.add(details);
                         Toast.makeText(PatientDashboardActivity.this, String.valueOf(eventList.size()), Toast.LENGTH_SHORT).show();
                         adapter.notifyDataSetChanged();

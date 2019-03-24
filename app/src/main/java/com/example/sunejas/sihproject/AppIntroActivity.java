@@ -102,7 +102,7 @@ public class AppIntroActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(AppIntroActivity.this, MainActivity.class));
+        startActivity(new Intent(AppIntroActivity.this, LauncherActivity.class));
         finish();
     }
 

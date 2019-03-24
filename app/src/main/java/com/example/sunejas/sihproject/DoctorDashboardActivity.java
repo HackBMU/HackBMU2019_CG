@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private long docPhone;
     SharedPreferences prefs;
+    ImageView logoutButton;
 
     LinearLayout splReqLL, appointmentLL, tagsLL;
     Button viewCurrentCaseButton;
@@ -47,6 +49,16 @@ public class DoctorDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         setContentView(R.layout.activity_doctor_dashboard);
+        logoutButton = findViewById(R.id.logout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefs.edit().clear().apply();
+                MDToast.makeText(DoctorDashboardActivity.this, "Logout Success", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show();
+                startActivity(new Intent(DoctorDashboardActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
         splReqLL = findViewById(R.id.ll_spl_req);
         appointmentLL = findViewById(R.id.ll_appointment);
@@ -61,7 +73,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
         splReqLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DoctorDashboardActivity.this, "Launch list of requests", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DoctorDashboardActivity.this, SpecialReqActivity.class));
             }
         });
 
@@ -80,15 +92,9 @@ public class DoctorDashboardActivity extends AppCompatActivity {
         });
 
 
-        viewCurrentCaseButton = findViewById(R.id.btn_view_curr_case);
+       // viewCurrentCaseButton = findViewById(R.id.btn_view_curr_case);
 
-        viewCurrentCaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent intent=new Intent(DoctorDashboardActivity.this,SingleEventDoctorActivity.class);
-               startActivity(intent);
-            }
-        });
+
 
         eventList = new ArrayList<>();
         adapter = new PostAdapter(eventList, getApplicationContext());
@@ -127,6 +133,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
                     try {
                         Log.d("database: ", dataSnapshot.toString());
                         EventDetails details = dataSnapshot.getValue(EventDetails.class);
+                        details.setUserkey(dataSnapshot.getKey());
                         eventList.add(details);
                         postsTextView.setVisibility(View.VISIBLE);
 

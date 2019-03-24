@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EventDetails {
 
-    private String allergies, assignedDocName, closeupImage, comment, overviewImage, duration, name;
+    private String allergies, assignedDocName, closeupImage, comment, overviewImage, duration, name,userkey;
     private long date, assignedDoc, userId;
     private ArrayList<String> progress, selfMed, tags;
     private int priority;
@@ -12,6 +12,14 @@ public class EventDetails {
 
     public String getDuration() {
         return duration;
+    }
+
+    public String getUserkey() {
+        return userkey;
+    }
+
+    public void setUserkey(String userkey) {
+        this.userkey = userkey;
     }
 
     public void setDuration(String duration) {

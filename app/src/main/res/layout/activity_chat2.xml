@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChatPage.ChatActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:alpha="0.6"
+        android:id="@+id/toolbar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doct-Aid-Chat"
+            android:layout_centerVertical="true"
+            android:textSize="22sp"
+            android:id="@+id/back_btn_chat"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/bebasneue_bold1"
+            android:layout_marginLeft="15dp"
+            android:textColor="#fff"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:id="@+id/logout"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chat_recycler_view"
         android:scrollbars="vertical"
+        android:layout_weight="1"
         android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -42,4 +72,4 @@
             android:text="send" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
